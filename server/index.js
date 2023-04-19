@@ -7,9 +7,9 @@ app.use(cors());
 app.use(express.json());
 
 const balances = {
-  "0x1": 100,
-  "0x2": 50,
-  "0x3": 75,
+  "e448090bcd9fd5ae0dd106dc2979427d60aad3a4": 100,
+  "69ce11a751fbb04403ee1ff83e577f44ea86d20c": 50,
+  "a923d18b5452008477e4c94e670434e618412353": 75,
 };
 
 app.get("/balance/:address", (req, res) => {
@@ -19,13 +19,15 @@ app.get("/balance/:address", (req, res) => {
 });
 
 app.post("/send", (req, res) => {
+  //TODO: get a signature from the client side applications
+  //recover the public address from the signature
   const { sender, recipient, amount } = req.body;
 
   setInitialBalance(sender);
   setInitialBalance(recipient);
 
   if (balances[sender] < amount) {
-    res.status(400).send({ message: "Not enough funds!" });
+    res.status(400).send({ message: "Not enough funds!"});
   } else {
     balances[sender] -= amount;
     balances[recipient] += amount;

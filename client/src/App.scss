@@ -1,3 +1,6 @@
+$small: 300px;
+$medium: 600px;
+
 body {
   font-family: "Muli", sans-serif;
   font-weight: 300;
@@ -47,7 +50,11 @@ input {
   background-color: #fdfdfe;
   padding-inline-start: 0.75rem;
   font-size: 0.875rem;
+  &:disabled {
+    background: #f0eaea;
+  }
 }
+
 
 .button {
   background-color: #319795;
@@ -62,11 +69,20 @@ input {
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled{
+    background-color: #277a79;
+  }
+
+
 }
 
 .wallet {
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: $medium) {
+    max-width: 380px;
+  }
 
   .balance {
     text-transform: uppercase;
